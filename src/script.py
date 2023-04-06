@@ -100,6 +100,7 @@ class IHDR(Chunk):
 
      
     def asJSON(self):             
+
         return {
             "width           ": self.width,  
             "height          ": self.height, 
@@ -131,8 +132,7 @@ class PNGDECODER:
         
         is_first = True
 
-        if not self.img:
-            return
+        if not self.img: return
         
         bytes_ = self.img.read()
 
@@ -147,9 +147,6 @@ class PNGDECODER:
             
             if is_first: is_first = False
 
-
-        
-    
     def __enter__(self) -> None:
         self.img = open(self.fn, "rb+") 
         return self
@@ -158,7 +155,7 @@ class PNGDECODER:
 
 
 def main(): 
-    
+   
     with PNGDECODER(FILE) as dec: dec.Scan()
 
 
