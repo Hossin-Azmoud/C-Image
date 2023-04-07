@@ -1,4 +1,3 @@
-// TODO: Make function to read all the chunks
 #include "png.h"
 
 void  print_byte(uint8_t byte, Format f)
@@ -12,7 +11,7 @@ void  print_byte(uint8_t byte, Format f)
 	if(f == ASCII)
 	{
 		if(isalnum(byte)) {
-			printf(" %c ", byte);
+			printf("%c", byte);
 			return;
 		}
 
@@ -24,7 +23,7 @@ void  print_as(const char *Label, uint8_t *buffer, size_t cap, Format f)
 {
 	if(!f) f = HEX;
 
-	printf("%s :", Label);
+	printf("%s : ", Label);
 	
 	for(size_t i = 0; i < cap; i++)
 	{
@@ -104,10 +103,10 @@ void  PrintIHDR(IHDR *ihdr)
 void  report_chunk(Chunk *C)
 {   
 	printf("\n");	
-	printf("Chunk size: %i\n", C->length);
-	print_as("Chunk Type: ", C->type, sizeof(C->type), ASCII);	
-	printf("Data: SKIPPED (TODO)\n");
-	printf("CRC: %i\n", C->crc);
+	printf("Chunk size : %i\n", C->length);
+ 	print_as("Chunk Type", C->type, sizeof(C->type), ASCII);	
+	printf("Data       : SKIPPED (TODO)\n");
+	printf("CRC        : %i\n", C->crc);
 }
 
 Chunk *ReadChunk(FILE *Stream, IHDR *ihdr)
@@ -121,9 +120,7 @@ Chunk *ReadChunk(FILE *Stream, IHDR *ihdr)
 	
 	if(*(uint32_t *)chunk->type == IHDR_)
 	{
-		
-		ihdr = ReadIHDR(Stream);
-
+		*ihdr = *ReadIHDR(Stream);
 	} else {
 		fseek(Stream, chunk->length, SEEK_CUR);
 	}

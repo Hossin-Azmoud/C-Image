@@ -39,16 +39,15 @@ int main(int argc, char **argv)
 	print_as("PNG header -> ", sig, PNG_SIG_CAP, HEX);
 	
 	IHDR *ihdr = malloc(sizeof(IHDR));
-	Chunk *C = ReadChunk(Input, ihdr);
-	
-	report_chunk(C);
-	printf("0x%08x\n",  *(uint32_t *)C->type);
+	Chunk *C   = malloc(sizeof(Chunk));
 
+	
 	while(true)
 	{
 				
 		C = ReadChunk(Input, ihdr);
 		report_chunk(C);
+		
 		if(*(uint32_t *)C->type == IHDR_)
 		{
 			PrintIHDR(ihdr);
@@ -62,9 +61,6 @@ int main(int argc, char **argv)
 			printf("Finished reading.\n");
 			break;
 		}
-		
-
-		free(C);
 	}
 	
 	/*
@@ -72,9 +68,8 @@ int main(int argc, char **argv)
 
 		printf("Read IHDR\n");
 		PrintIHDR(ihdr);
-		free(ihdr);
 	*/
-
+	free(ihdr);
 	fclose(Input);
 #endif
 	return 0;

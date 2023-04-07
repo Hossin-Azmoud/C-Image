@@ -3,8 +3,6 @@
 
 #define TYPE_CAP     4
 #define CHUNK_SIZE   1024
-#define IEND_        0x444E4549
-#define IHDR_        0x52444849
 #define PNG_SIG_CAP  8
 
 #include <stdio.h>
@@ -26,11 +24,17 @@ static const uint8_t PNG_SIG[PNG_SIG_CAP] = {
 	10
 }; 
 
+typedef enum CHUNK_TYPES {
+	IEND_ = 0x444E4549, 
+	IHDR_ = 0x52444849,
+	IDAT_ = 0x54414449,
+} CHUNK_TYPE;
+
 typedef enum Format {
 	HEX = 0,
 	ASCII,
+	INT,
 } Format;
-
  
 typedef struct PNGChunk 
 {   
