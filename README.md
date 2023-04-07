@@ -77,7 +77,5 @@ typedef struct IHDR {
 - `*ReadChunk(FILE *Stream, IHDR *ihdr)`: read a chunk and if it is IHDR, Store its data in IHDR structure.
 - `ReadIntoChunkBuffer(FILE *Stream, Chunk *CBuffer)`: Read a chunk into a preallocated buffer.
 
-# Files
- (NOT DOCUMENTED)
 # resources
 Official Png format: [libpng docs](http://www.libpng.org/pub/png/spec/1.2/PNG-Contents.html)
